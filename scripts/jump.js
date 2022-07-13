@@ -14,3 +14,4 @@ function handleJump() {
 }
 
 document.addEventListener("keydown", handleJump);
+document.addEventListener("touchstart", handleJump);
