@@ -1,34 +1,44 @@
+let boardMode = "morning";
 let currentScore = 0;
 let width = 100;
 
-const decrementWidth = () => width--;
-const incrementWidth = () => width++;
+const decrementBoardWidth = () => width--;
+const incrementBoardWidth = () => width++;
+
+function toggleBoardMode() {
+  boardMode === "morning" ? nightBoard() : morningBoard();
+}
+
+function resizeBoardWidth() {
+  if (width < 100 && boardMode === "morning") {
+    incrementBoardWidth();
+    gameBoard.style.width = `${width}%`;
+  }
+  if (boardMode === "night") {
+    decrementBoardWidth();
+    gameBoard.style.width = `${width}%`;
+  }
+}
 
 function nightBoard() {
-  decrementWidth();
-
+  boardMode = "night";
   gameBoard.style.background = "var(--night-bg)";
-  gameBoard.style.width = `${width}%`;
   score.style.color = "var(--night-score)";
 }
 
 function morningBoard() {
+  boardMode = "morning";
+  score.style.color = "var(--morning-score)";
   gameBoard.style.background = "var(--morning-bg)";
-
-  if (width < 100) {
-    incrementWidth();
-    gameBoard.style.width = `${width}%`;
-    score.style.color = "var(--morning-score)";
-  }
 }
 
 const loopScore = setInterval(() => {
   currentScore = currentScore + 1;
   score.innerHTML = `Score: ${currentScore}`;
 
-  if (currentScore > 50 && currentScore < 125) {
-    nightBoard();
-  } else {
-    morningBoard();
+  resizeBoardWidth();
+
+  if (currentScore % 75 === 0 && currentScore !== 0) {
+    toggleBoardMode();
   }
 }, 100);
