@@ -13,7 +13,8 @@ function resizeBoardWidth() {
     incrementBoardWidth();
     gameBoard.style.width = `${width}%`;
   }
-  if (boardMode === "night") {
+
+  if (width >= 40 && boardMode === "night") {
     decrementBoardWidth();
     gameBoard.style.width = `${width}%`;
   }
