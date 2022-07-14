@@ -7,13 +7,17 @@ function stopPipeAnimation(position) {
   pipe.style.left = `${position}px`;
 }
 
-function stopMario(position) {
-  mario.style.animation = "none";
-  mario.style.bottom = `${position}px`;
+function marioCollisionAnimation() {
+  mario.classList.add("collision");
 
   mario.src = "./assets/images/game-over.png";
   mario.style.width = "75px";
   mario.style.marginLeft = "50px";
+
+  setTimeout(() => {
+    mario.style.bottom = "-180px";
+    mario.style.animation = "none";
+  }, 1250);
 
   isGameOver = true;
 }
@@ -24,10 +28,10 @@ function stopCloudsAnimation() {
   clouds.style.animation = "none";
 }
 
-function gameOver(pipePosition, marioPosition) {
+function gameOver(pipePosition) {
   isGameOver = true;
 
-  stopMario(marioPosition);
+  marioCollisionAnimation();
   stopPipeAnimation(pipePosition);
   stopCloudsAnimation();
 
