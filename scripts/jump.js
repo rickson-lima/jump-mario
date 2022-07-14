@@ -1,16 +1,21 @@
 const jumpClassName = "jump";
 const jumpAudio = new Audio("./assets/audios/jump.mp3");
+let isJumping = false;
 
 function handleJump() {
   if (isGameOver) return;
 
+  if (isJumping) return;
+
   mario.classList.add(jumpClassName);
-  // adicionar o audio de jump.mp3
+
   jumpAudio.play();
+  isJumping = true;
 
   setTimeout(() => {
     mario.classList.remove(jumpClassName);
-  }, 500);
+    isJumping = false;
+  }, 300);
 }
 
 document.addEventListener("keydown", handleJump);
