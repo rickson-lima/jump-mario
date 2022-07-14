@@ -4,6 +4,10 @@
 
   --morning-score: #000;
   --night-score: #fff;
+
+  --jump-animation-duration: 350ms;
+  --pipe-animation-duration: 1000ms;
+  --collision-animation-duration: 1250ms;
 }
 
 * {
@@ -34,6 +38,12 @@
   font-size: 2rem;
 }
 
+@media screen and (max-width: 600px) {
+  #game-board {
+    height: 100vh;
+  }
+}
+
 .clouds {
   width: 550px;
   position: absolute;
@@ -45,7 +55,7 @@
   position: absolute;
   bottom: 0;
   width: 80px;
-  animation: pipe-animation 750ms infinite linear;
+  animation: pipe-animation var(--pipe-animation-duration) infinite linear;
 }
 
 .mario {
@@ -55,11 +65,11 @@
 }
 
 .jump {
-  animation: jump-animation 400ms ease-out;
+  animation: jump-animation var(--jump-animation-duration) ease-out;
 }
 
 .collision {
-  animation: collision-animation 1.25s ease-in-out;
+  animation: collision-animation var(--collision-animation-duration) ease-in-out;
 }
 
 @keyframes collision-animation {
